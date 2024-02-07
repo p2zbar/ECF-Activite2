@@ -1,10 +1,10 @@
-from flask import Flask
+from fastapi import FastAPI
 from pyspark.sql import SparkSession
 
-app = Flask(__name__)
+app = FastAPI()
 
-@app.route('/')
-def run_spark_job():
+@app.get("/")
+async def run_spark_job():
     # Initialize a SparkSession
     spark = SparkSession.builder.appName("HelloWorldApp").getOrCreate()
 
@@ -17,7 +17,4 @@ def run_spark_job():
     spark.stop()
 
     # Return the result to the web page
-    return '<br>'.join(result)
-
-if __name__ == '__main__':
-    app.run(debug=True)
+    return {"message": result}
