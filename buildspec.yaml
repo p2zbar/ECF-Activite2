@@ -1,0 +1,36 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
+      - REPOSITORY_URI=767397875675.dkr.ecr.us-east-2.amazonaws.com/pysparkdockerp2r
+      - IMAGE_TAG=latest
+
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Building the Docker image...
+      - docker build -t $REPOSITORY_URI:$IMAGE_TAG .
+
+  test:
+    commands:
+      - echo Running tests...
+      - docker run -d --name fastapi_test -p 4040:4040 $REPOSITORY_URI:$IMAGE_TAG
+      - sleep 10 # Wait for the server to start
+      - curl -f http://localhost:4040/
+      - docker stop fastapi_test
+      - docker rm fastapi_test
+
+  post_build:
+    commands:
+      - echo Build and test phases completed on `date`
+      - echo Pushing the Docker image...
+      - docker push $REPOSITORY_URI:$IMAGE_TAG
+      - echo Writing image definitions file...
+      - printf '[{"name":"pysparkdockerp2r","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
+
+artifacts:
+  files:
+    - imagedefinitions.json
