@@ -1,4 +1,9 @@
 version: 0.2
+variables:
+ECR_REPOSITORY_URI: "767397875675.dkr.ecr.eu-central-1.amazonaws.com/deploy-pyspark"
+AWS_DEFAULT_REGION: eu-central-1
+IMAGE_REPO_NAME: pyspark-ecf
+IMAGE_TAG: latest
 phases:
   pre_build:
     commands:
