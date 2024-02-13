@@ -7,7 +7,7 @@ env:
     IMAGE_REPO_NAME: "pyspark-ecf"
     IMAGE_TAG: "latest"
     # Ensure you define CONTAINER_NAME here if it's used in your buildspec
-    CONTAINER_NAME: "service-pyspark"  
+    CONTAINER_NAME: "web"  
 
 phases:
   pre_build:
