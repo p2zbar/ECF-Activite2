@@ -8,7 +8,7 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # Variables for Spark Installation
-ENV APACHE_SPARK_VERSION=3.5.0 \
+ENV APACHE_SPARK_VERSION=3.5.1 \
     HADOOP_VERSION=3 \
     SPARK_HOME=/usr/local/spark
 
