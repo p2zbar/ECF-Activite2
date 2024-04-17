@@ -2,9 +2,9 @@ version: 0.2
 
 env:
   variables:
-    ECR_REPOSITORY_URI: "767397875675.dkr.ecr.eu-central-1.amazonaws.com/deploy-pyspark"
+    ECR_REPOSITORY_URI: "767397875675.dkr.ecr.eu-central-1.amazonaws.com/datapro-pyspark"
     AWS_DEFAULT_REGION: "eu-central-1"
-    IMAGE_REPO_NAME: "pyspark-ecf"
+    IMAGE_REPO_NAME: "datapro-pyspark"
     IMAGE_TAG: "latest"
     CONTAINER_NAME: "web"
 
